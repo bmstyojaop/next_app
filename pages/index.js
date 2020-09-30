@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import style from '../static/Style';
+import Counter from '../components/Counter'
 
 
 export default () =><div>
@@ -7,9 +8,5 @@ export default () =><div>
   <h1>Next.js</h1>
   <p>Welcome to next.js!</p>
   <hr />
-  <div>
-    <Link href="/other">
-      <button>Go to other page &gt;&gt;</button>
-    </Link>
-  </div>
+  <Counter />
 </div>
