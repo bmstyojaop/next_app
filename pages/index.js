@@ -7,8 +7,9 @@ export default () =>(
   <Layout header="Next" title="Top page.">
     <Counter/>
     <hr/>
-    <Link href="./other"><button>
+    <Link href="./calc"><button>
       go to Other &gt;&gt;
     </button></Link>
+    {/* <Link></Link> */}
   </Layout>
 );
