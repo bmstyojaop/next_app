@@ -1,50 +1,56 @@
 import { createStore, applyMiddleware } from 'redux'
 import thunkMiddleware from 'redux-thunk'
+import firebase from "firebase";
+
+// Firebaseの初期化
+var firebaseConfig = {
+  apiKey: "AIzaSyBkdY07fzi90iLUnnBI0SOnyMbI-TYACeM",
+  authDomain: "ktnoreact.firebaseapp.com",
+  databaseURL: "https://ktnoreact.firebaseio.com",
+  projectId: "ktnoreact",
+  storageBucket: "ktnoreact.appspot.com",
+  messagingSenderId: "511415959629",
+  appId: "1:511415959629:web:77b84577b1f8c09e745c04",
+  measurementId: "G-2YXEJ8MPST"
+};
+
+var fireapp;
+try {
+  fireapp = firebase.initializeApp(firebaseConfig)
+  // firebase.analytics();
+} catch (error) {
+  console.log(error.message);
+}
+export default fireapp;
 
 
-// ステート初期化
+// ステート初期値
 const initial = {
-  message:'START',
+  login:false,
+  username:'(click here!)',
+  email:'',
   data:[],
-  number:[],
-  result:0
+  items:[]
 }
 
 
 // レデューサー
-function calcReducer(state = initial, action) {
+function fireReducer(state = initial, action) {
   switch (action.type) {
-    // 計算実行
-    case 'ENTER':
-      let data2 = state.data.slice();
-      let s = action.value;
-      data2.unshift(s);
-      let num = s.replace(/[^0-9]/g,"");
-      let number2 = state.number.slice();
-      number2.unshift(num);
-      let result = (state.result * 1) + (num * 1);
-      return {
-        message:'ENTER',
-        data:data2,
-        number:number2,
-        result:result
-      };
-    // リセット
-    case 'RESET':
-      return {
-        message:'RESET',
-        data:[],
-        number:[],
-        result:0
-      };
+    // ダミー
+    case 'UPDATE_USER':
+      return action.value;
     // デフォルト
     default:
       return state;
   }
 }
 
+
 // initStore関数
 export function initStore(state = initial) {
-  return createStore(calcReducer, state,
+  return createStore(fireReducer, state,
     applyMiddleware(thunkMiddleware))
 }
+
+
